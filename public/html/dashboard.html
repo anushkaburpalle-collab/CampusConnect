@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Connect Dashboard</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="logo small">
+                CC
+            </div>
+
+            <span>
+                Campus Connect
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <button
+                class="nav-item active"
+                onclick="showSection('home')">
+
+                🏠 Dashboard
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('cart')">
+
+                🛒 Campus Cart
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('study')">
+
+                📚 Study Buddy
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('materials')">
+
+                📝 Study Materials
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('inbox')">
+
+                💬 Inbox
+
+            </button>
+
+        </nav>
+
+
+        <button
+            class="logout"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    YOUR CAMPUS HUB
+                </p>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="profile-pill">
+
+                <div class="avatar">
+                    <span id="avatarLetter">A</span>
+                </div>
+
+                <span id="userName">
+                    Student
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- HOME -->
+
+        <section
+            id="home"
+            class="section active-section">
+
+            <div class="hero-card">
+
+                <div>
+
+                    <p class="eyebrow">
+                        CAMPUS CONNECT
+                    </p>
+
+                    <h2>
+                        Everything you need,
+                        <span>from your campus.</span>
+                    </h2>
+
+                    <p>
+                        Buy affordable resources,
+                        find focused study partners,
+                        and share knowledge with peers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <div
+                    class="quick-card"
+                    onclick="showSection('cart')">
+
+                    <span class="quick-icon">
+                        🛒
+                    </span>
+
+                    <h3>Campus Cart</h3>
+
+                    <p>
+                        Buy or sell textbooks,
+                        equipment & essentials.
+                    </p>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="quick-card"
+                    onclick="showSection('study')">
+
+                    <span class="quick-icon">
+                        📚
+                    </span>
+
+                    <h3>Study Buddy</h3>
+
+                    <p>
+                        Find prepared peers
+                        before exams.
+                    </p>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CAMPUS CART -->
+
+        <section
+            id="cart"
+            class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        MARKETPLACE
+                    </p>
+
+                    <h2>
+                        Campus Cart
+                    </h2>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="openSellModal()">
+
+                    + Sell Item
+
+                </button>
+
+            </div>
+
+
+            <div class="search-box">
+
+                🔎
+
+                <input
+                    id="listingSearch"
+                    placeholder="Search textbooks, lab coats, calculators..."
+                    oninput="filterListings()">
+
+            </div>
+
+
+            <div
+                id="listingGrid"
+                class="card-grid">
+
+            </div>
+
+        </section>
+
+
+        <!-- STUDY -->
+
+        <section
+            id="study"
+            class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        LEARN TOGETHER
+                    </p>
+
+                    <h2>
+                        Study Buddy
+                    </h2>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="openStudyModal()">
+
+                    + Create Session
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="studyGrid"
+                class="card-grid">
+
+            </div>
+
+        </section>
+
+
+        <!-- MATERIALS -->
+
+        <section
+            id="materials"
+            class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        KNOWLEDGE HUB
+                    </p>
+
+                    <h2>
+                        Study Materials
+                    </h2>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="uploadMaterial()">
+
+                    + Share Material
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="materialsGrid"
+                class="card-grid">
+
+            </div>
+
+        </section>
+
+
+        <!-- INBOX -->
+
+        <section
+            id="inbox"
+            class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        CONNECTIONS
+                    </p>
+
+                    <h2>
+                        Inbox
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="inboxList"
+                class="inbox-list">
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- SELL MODAL -->
+
+<div
+    id="sellModal"
+    class="modal">
+
+    <div class="modal-card">
+
+        <button
+            class="close"
+            onclick="closeSellModal()">
+            ×
+        </button>
+
+        <h2>
+            Sell an item
+        </h2>
+
+        <input
+            id="sellTitle"
+            placeholder="Item name">
+
+        <input
+            id="sellCategory"
+            placeholder="Category">
+
+        <input
+            id="sellPrice"
+            type="number"
+            placeholder="Price ₹">
+
+        <select id="sellCondition">
+
+            <option>Like New</option>
+            <option>Good</option>
+            <option>Used</option>
+
+        </select>
+
+        <textarea
+            id="sellDescription"
+            placeholder="Describe your item">
+        </textarea>
+
+        <button
+            class="primary-btn full"
+            onclick="createListing()">
+
+            Publish Listing
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- STUDY MODAL -->
+
+<div
+    id="studyModal"
+    class="modal">
+
+    <div class="modal-card">
+
+        <button
+            class="close"
+            onclick="closeStudyModal()">
+            ×
+        </button>
+
+        <h2>
+            Create Study Session
+        </h2>
+
+        <input
+            id="studyTitle"
+            placeholder="Session title">
+
+        <input
+            id="studySubject"
+            placeholder="Subject">
+
+        <input
+            id="studyDate"
+            type="date">
+
+        <input
+            id="studyTime"
+            type="time">
+
+        <input
+            id="studyLocation"
+            placeholder="Location">
+
+        <input
+            id="studyMax"
+            type="number"
+            placeholder="Maximum members"
+            value="5">
+
+        <textarea
+            id="studyDescription"
+            placeholder="What will you study?">
+        </textarea>
+
+        <button
+            class="primary-btn full"
+            onclick="createStudySession()">
+
+            Create Session
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
