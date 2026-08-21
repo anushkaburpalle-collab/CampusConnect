@@ -1,17 +1,3478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusConnect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
 
-    <title>CampusConnect</title>
+    --purple-950: #241536;
+    --purple-900: #331f4c;
+    --purple-800: #4a3267;
+    --purple-700: #634584;
+    --purple-600: #7c5aa0;
+    --purple-500: #9b7fb8;
+    --purple-300: #c6bade;
+    --purple-200: #ddd3ea;
+    --purple-100: #f1ecf7;
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    --cream: #f3d9e5;
+    --cream-dark: #e9c3d6;
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    --green: #6b8f79;
+    --green-light: #e8f1eb;
 
-    <link rel="stylesheet" href="css/style.css">
+    --gold: #de638a;
+    --gold-light: #fbe9ef;
+
+    --rose: #ad6c86;
+    --rose-light: #fdf1f3;
+
+    --text: #2a2033;
+    --muted: #8d8393;
+    --border: #ece3ee;
+    --white: #ffffff;
+
+    --shadow:
+        0 18px 50px rgba(74, 50, 103, .10);
+
+    --radius: 20px;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family: "DM Sans", sans-serif;
+
+    background: #fbf8fa;
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+    line-height: 1.5;
+}
+
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+button,
+input,
+textarea,
+select {
+    outline: none;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+
+    width: 250px;
+
+    position: fixed;
+
+    inset: 0 auto 0 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fdfaFC 100%
+        );
+
+    border-right: 1px solid var(--border);
+
+    padding: 28px 18px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 50;
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+
+.brand-mark {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 13px;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple-800),
+            var(--purple-500)
+        );
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px
+        rgba(74, 50, 103, .24);
+}
+
+
+.brand-mark span {
+    font-size: 20px;
+}
+
+
+.brand-name {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: -.4px;
+}
+
+
+.brand-name span {
+    color: var(--purple-600);
+}
+
+
+.brand-subtitle {
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    margin-top: 1px;
+}
+
+
+.navigation {
+
+    margin-top: 40px;
+}
+
+
+.nav-label {
+
+    font-size: 9px;
+
+    letter-spacing: 1.4px;
+
+    font-weight: 700;
+
+    color: #b6a9bb;
+
+    padding: 0 12px;
+
+    margin-bottom: 10px;
+}
+
+
+.nav-label.second {
+    margin-top: 28px;
+}
+
+
+.nav-item {
+
+    width: 100%;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #7c7382;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    margin-bottom: 3px;
+
+    font-size: 13px;
+
+    transition: .2s;
+}
+
+
+.nav-item:hover {
+
+    background: var(--purple-100);
+
+    color: var(--purple-800);
+}
+
+
+.nav-item.active {
+
+    background:
+        linear-gradient(
+            90deg,
+            #f1ecf7,
+            #f8ecf3
+        );
+
+    color: var(--purple-800);
+
+    font-weight: 700;
+}
+
+
+.nav-icon {
+
+    width: 20px;
+
+    text-align: center;
+
+    font-size: 17px;
+}
+
+
+.nav-badge {
+
+    margin-left: auto;
+
+    font-size: 9px;
+
+    min-width: 21px;
+
+    height: 21px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--gold-light);
+
+    color: var(--gold);
+
+    font-weight: 700;
+}
+
+
+.nav-badge.purple {
+
+    background: var(--purple-100);
+
+    color: var(--purple-700);
+}
+
+
+.sidebar-bottom {
+
+    margin-top: auto;
+}
+
+
+.campus-card {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+    padding: 12px;
+
+    background: var(--green-light);
+
+    border: 1px solid #dbe9e1;
+
+    border-radius: 13px;
+
+    margin-bottom: 16px;
+}
+
+
+.campus-card-icon {
+
+    width: 27px;
+
+    height: 27px;
+
+    border-radius: 8px;
+
+    background: var(--green);
+
+    color: white;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 11px;
+}
+
+
+.campus-card strong {
+
+    display: block;
+
+    font-size: 10px;
+
+    color: #496c59;
+}
+
+
+.campus-card small {
+
+    display: block;
+
+    font-size: 9px;
+
+    color: #789080;
+
+    margin-top: 2px;
+}
+
+
+.sidebar-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 8px;
+}
+
+
+.sidebar-user-info {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.sidebar-user-info strong {
+
+    display: block;
+
+    font-size: 11px;
+}
+
+
+.sidebar-user-info small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+.avatar {
+
+    width: 37px;
+
+    height: 37px;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple-300),
+            var(--purple-100)
+        );
+
+    color: var(--purple-800);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.avatar.small {
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 10px;
+}
+
+
+.avatar.tiny {
+
+    width: 29px;
+
+    height: 29px;
+
+    border-radius: 9px;
+
+    font-size: 8px;
+}
+
+
+.more-btn {
+
+    background: transparent;
+
+    border: 0;
+
+    color: #aaa2ad;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+.mobile-header {
+
+    display: none;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main {
+
+    margin-left: 250px;
+
+    padding: 30px 42px 60px;
+
+    max-width: 1700px;
+}
+
+
+.topbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+
+.eyebrow {
+
+    font-size: 9px;
+
+    letter-spacing: 1.3px;
+
+    color: #a99daf;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+
+.topbar h1 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 29px;
+
+    letter-spacing: -.7px;
+
+    font-weight: 700;
+}
+
+
+.top-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.icon-button,
+.notification-button {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 11px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    color: #786e7e;
+
+    display: grid;
+
+    place-items: center;
+
+    position: relative;
+}
+
+
+.notification-button i {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #b23f66;
+
+    position: absolute;
+
+    top: 8px;
+
+    right: 8px;
+}
+
+
+.top-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 11px;
+
+    background: var(--purple-800);
+
+    color: white;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.page {
+    display: none;
+}
+
+
+.page.active {
+    display: block;
+
+    animation:
+        pageIn .35s ease;
+}
+
+
+@keyframes pageIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+
+    min-height: 390px;
+
+    border-radius: 27px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    padding: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 82% 45%,
+            rgba(222, 99, 138, .26),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 70% 80%,
+            rgba(255, 255, 255, .06),
+            transparent 28%
+        ),
+        linear-gradient(
+            120deg,
+            #241536,
+            #4a3267 55%,
+            #7c5aa0
+        );
+
+    box-shadow:
+        0 25px 60px
+        rgba(42, 20, 55, .18);
+}
+
+
+.hero-content {
+
+    max-width: 610px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.hero-tag {
+
+    display: inline-flex;
+
+    gap: 8px;
+
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.09);
+
+    border:
+        1px solid
+        rgba(255,255,255,.14);
+
+    font-size: 8px;
+
+    letter-spacing: 1.3px;
+
+    font-weight: 700;
+}
+
+
+.hero-tag span {
+    color: #f3d9e5;
+}
+
+
+.hero h2 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(38px, 4vw, 57px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1.7px;
+
+    margin: 20px 0 18px;
+}
+
+
+.hero h2 em {
+
+    color: #f7b9c4;
+
+    font-style: italic;
+}
+
+
+.hero p {
+
+    color: #ecd9e3;
+
+    font-size: 13px;
+
+    max-width: 560px;
+
+    line-height: 1.8;
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 29px;
+}
+
+
+.button {
+
+    border: 0;
+
+    border-radius: 11px;
+
+    padding: 12px 17px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    transition: .2s;
+}
+
+
+.button:hover {
+
+    transform: translateY(-2px);
+}
+
+
+.button-light {
+
+    background: white;
+
+    color: var(--purple-800);
+}
+
+
+.button-outline {
+
+    background: transparent;
+
+    color: white;
+
+    border:
+        1px solid
+        rgba(255,255,255,.23);
+}
+
+
+.button-dark {
+
+    background: var(--purple-800);
+
+    color: white;
+
+    box-shadow:
+        0 7px 18px
+        rgba(74, 50, 103, .2);
+}
+
+
+.button.full {
+    width: 100%;
+}
+
+
+.hero-visual {
+
+    position: absolute;
+
+    right: 4%;
+
+    top: 0;
+
+    width: 430px;
+
+    height: 100%;
+}
+
+
+.orb {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(1px);
+}
+
+
+.orb-one {
+
+    width: 240px;
+
+    height: 240px;
+
+    right: 50px;
+
+    top: 70px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        inset 0 0 80px
+        rgba(255,255,255,.04);
+}
+
+
+.orb-two {
+
+    width: 320px;
+
+    height: 320px;
+
+    right: 10px;
+
+    top: 30px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+
+.hero-circle {
+
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 50%;
+
+    position: absolute;
+
+    right: 88px;
+
+    top: 105px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #de638a,
+            #634584
+        );
+
+    display: grid;
+
+    place-items: center;
+
+    box-shadow:
+        0 25px 50px
+        rgba(30, 15, 40, .32);
+}
+
+
+.circle-inner {
+
+    width: 130px;
+
+    height: 130px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(74,50,103,.3);
+}
+
+
+.circle-inner span {
+
+    font-size: 24px;
+
+    margin-bottom: 5px;
+
+    color: #f3d9e5;
+}
+
+
+.circle-inner strong {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 17px;
+}
+
+
+.floating-card {
+
+    position: absolute;
+
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 13px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.94);
+
+    color: var(--text);
+
+    box-shadow:
+        0 15px 35px
+        rgba(30, 15, 40, .2);
+
+    backdrop-filter: blur(12px);
+}
+
+
+.floating-card strong {
+
+    display: block;
+
+    font-size: 10px;
+}
+
+
+.floating-card small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    margin-top: 2px;
+}
+
+
+.note-card {
+
+    right: 0;
+
+    top: 75px;
+}
+
+
+.cart-card {
+
+    left: 18px;
+
+    bottom: 75px;
+}
+
+
+.floating-icon {
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 10px;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 14px;
+}
+
+
+.floating-icon.lavender {
+
+    background: var(--purple-100);
+
+    color: var(--purple-700);
+}
+
+
+.floating-icon.cream {
+
+    background: var(--gold-light);
+
+    color: var(--gold);
+}
+
+
+/* =========================================
+   SECTION HEADINGS
+========================================= */
+
+.section-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    margin: 35px 0 15px;
+}
+
+
+.section-kicker {
+
+    display: block;
+
+    color: #a99daf;
+
+    font-size: 8px;
+
+    letter-spacing: 1.3px;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+
+.section-heading h3 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 22px;
+
+    letter-spacing: -.5px;
+}
+
+
+.section-note {
+
+    color: #a79aac;
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   MODULE CARDS
+========================================= */
+
+.module-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 17px;
+}
+
+
+.module-card {
+
+    min-height: 260px;
+
+    padding: 26px;
+
+    border-radius: 21px;
+
+    border: 1px solid transparent;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+
+.module-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow: var(--shadow);
+}
+
+
+.study-module {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f1ecf7,
+            #ded3ea
+        );
+
+    border-color: #ddd3ea;
+}
+
+
+.cart-module {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8e3ec,
+            #f1cfdf
+        );
+
+    border-color: #e9c3d6;
+}
+
+
+.module-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+.module-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 13px;
+
+    background: rgba(255,255,255,.65);
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 19px;
+
+    color: var(--purple-700);
+
+    box-shadow:
+        0 6px 18px
+        rgba(74,50,103,.08);
+}
+
+
+.cart-module .module-icon {
+
+    color: #b23f66;
+
+}
+
+
+.arrow-circle {
+
+    width: 31px;
+
+    height: 31px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.65);
+
+    display: grid;
+
+    place-items: center;
+
+    color: #817783;
+}
+
+
+.module-label {
+
+    font-size: 8px;
+
+    letter-spacing: 1.1px;
+
+    color: #a1929f;
+
+    font-weight: 700;
+}
+
+
+.module-card h3 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 27px;
+
+    margin: 7px 0;
+}
+
+
+.module-card p {
+
+    max-width: 470px;
+
+    color: #83788a;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+
+.module-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 23px;
+
+    color: #92879b;
+
+    font-size: 9px;
+}
+
+
+.mini-avatars {
+
+    display: flex;
+
+    padding-left: 6px;
+}
+
+
+.mini-avatars span {
+
+    width: 25px;
+
+    height: 25px;
+
+    margin-left: -6px;
+
+    border-radius: 50%;
+
+    border: 2px solid #f1ecf7;
+
+    background: #c6bade;
+
+    color: var(--purple-800);
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.mini-product {
+
+    width: 26px;
+
+    height: 26px;
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.7);
+
+    display: grid;
+
+    place-items: center;
+
+    margin-right: -3px;
+}
+
+
+/* =========================================
+   DASHBOARD GRID
+========================================= */
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.35fr .85fr;
+
+    gap: 17px;
+
+    margin-top: 17px;
+}
+
+
+.content-panel {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 7px 30px
+        rgba(74,50,103,.03);
+}
+
+
+.panel-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+
+.panel-header h3 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 19px;
+}
+
+
+.text-button {
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--purple-700);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.question-item {
+
+    display: grid;
+
+    grid-template-columns: 45px 1fr 30px;
+
+    gap: 13px;
+
+    align-items: start;
+
+    padding: 15px 0;
+
+    border-top: 1px solid #f3ecf3;
+}
+
+
+.question-subject {
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 12px;
+
+    background: var(--purple-100);
+
+    color: var(--purple-700);
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 7px;
+
+    font-weight: 800;
+}
+
+
+.question-subject.dbms {
+
+    background: var(--green-light);
+
+    color: var(--green);
+}
+
+
+.question-subject.graphics {
+
+    background: var(--gold-light);
+
+    color: var(--gold);
+}
+
+
+.question-content h4 {
+
+    font-size: 12px;
+
+    margin-bottom: 4px;
+}
+
+
+.question-content p {
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.question-meta {
+
+    display: flex;
+
+    gap: 6px;
+
+    color: #aea3ae;
+
+    font-size: 8px;
+
+    margin-top: 7px;
+}
+
+
+.small-arrow {
+
+    width: 28px;
+
+    height: 28px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    border-radius: 8px;
+
+    color: #8e8393;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.activity-date {
+
+    font-size: 9px;
+
+    color: var(--muted);
+
+    padding-top: 3px;
+}
+
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.stat {
+
+    padding: 13px;
+
+    border-radius: 13px;
+
+    background: #faf8fb;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.stat-icon {
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 9px;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 12px;
+}
+
+
+.stat-icon.purple {
+
+    background: var(--purple-100);
+
+    color: var(--purple-700);
+}
+
+
+.stat-icon.green {
+
+    background: var(--green-light);
+
+    color: var(--green);
+}
+
+
+.stat-icon.gold {
+
+    background: var(--gold-light);
+
+    color: var(--gold);
+}
+
+
+.stat-icon.rose {
+
+    background: var(--rose-light);
+
+    color: var(--rose);
+}
+
+
+.stat strong {
+
+    display: block;
+
+    font-size: 17px;
+
+    line-height: 1;
+}
+
+
+.stat small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    margin-top: 4px;
+}
+
+
+.progress-area {
+
+    margin-top: 23px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #f3ecf3;
+}
+
+
+.progress-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 9px;
+
+    margin-bottom: 8px;
+}
+
+
+.progress-heading strong {
+
+    color: var(--purple-700);
+}
+
+
+.progress {
+
+    height: 7px;
+
+    background: #f0e9f2;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.progress span {
+
+    display: block;
+
+    width: 78%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple-800),
+            var(--gold)
+        );
+}
+
+
+.progress-area p {
+
+    font-size: 8px;
+
+    color: var(--muted);
+
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   PAGE HERO
+========================================= */
+
+.page-hero {
+
+    border-radius: 23px;
+
+    padding: 38px;
+
+    min-height: 220px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    margin-bottom: 18px;
+}
+
+
+.purple-page {
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            #ddc7e8,
+            transparent 25%
+        ),
+        #f1ecf7;
+}
+
+
+.cart-page {
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            #f0c9d6,
+            transparent 25%
+        ),
+        #faf0f4;
+}
+
+
+.simple-page {
+
+    background:
+        linear-gradient(
+            120deg,
+            #f1e5ef,
+            #faf6f8
+        );
+}
+
+
+.page-hero h2 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 40px;
+
+    line-height: 1.05;
+
+    letter-spacing: -1px;
+
+    margin: 8px 0 10px;
+}
+
+
+.page-hero h2 em {
+
+    color: var(--purple-700);
+
+    font-style: italic;
+}
+
+
+.page-hero p {
+
+    color: #837786;
+
+    font-size: 11px;
+
+    max-width: 550px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   STUDY PAGE
+========================================= */
+
+.study-tabs {
+
+    display: flex;
+
+    gap: 5px;
+
+    border-bottom: 1px solid var(--border);
+
+    margin-bottom: 18px;
+}
+
+
+.tab {
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    padding: 11px 15px;
+
+    border-bottom: 2px solid transparent;
+}
+
+
+.tab.active {
+
+    color: var(--purple-800);
+
+    border-color: var(--purple-700);
+
+    font-weight: 700;
+}
+
+
+.study-toolbar,
+.cart-toolbar {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 16px;
+}
+
+
+.search-box {
+
+    height: 42px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 13px;
+
+    gap: 8px;
+
+    flex: 1;
+}
+
+
+.search-box span {
+
+    color: #a89dac;
+}
+
+
+.search-box input {
+
+    width: 100%;
+
+    border: 0;
+
+    font-size: 10px;
+
+    background: transparent;
+}
+
+
+select {
+
+    height: 42px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    border-radius: 11px;
+
+    padding: 0 13px;
+
+    color: #786c7d;
+
+    font-size: 10px;
+}
+
+
+.questions-page-list {
+
+    display: grid;
+
+    gap: 11px;
+}
+
+
+.large-question {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    padding: 20px;
+
+    transition: .2s;
+}
+
+
+.large-question:hover {
+
+    border-color: #e0b9cd;
+
+    box-shadow: var(--shadow);
+}
+
+
+.question-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+}
+
+
+.subject-pill {
+
+    padding: 5px 8px;
+
+    background: var(--purple-100);
+
+    color: var(--purple-700);
+
+    border-radius: 6px;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: .7px;
+}
+
+
+.subject-pill.dbms {
+
+    background: var(--green-light);
+
+    color: var(--green);
+}
+
+
+.subject-pill.graphics {
+
+    background: var(--gold-light);
+
+    color: var(--gold);
+}
+
+
+.question-time {
+
+    color: #aea3ae;
+
+    font-size: 8px;
+}
+
+
+.large-question h3 {
+
+    font-size: 15px;
+
+    margin-bottom: 6px;
+}
+
+
+.large-question > p {
+
+    color: #837786;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+
+    max-width: 800px;
+}
+
+
+.large-question-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-top: 1px solid #f3ecf3;
+
+    margin-top: 16px;
+
+    padding-top: 13px;
+}
+
+
+.person {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.person strong {
+
+    display: block;
+
+    font-size: 9px;
+}
+
+
+.person small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    margin-top: 2px;
+}
+
+
+.question-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    font-size: 9px;
+
+    color: var(--muted);
+}
+
+
+.question-actions button {
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--purple-700);
+
+    font-weight: 700;
+
+    font-size: 9px;
+}
+
+
+/* =========================================
+   CART
+========================================= */
+
+.category-buttons {
+
+    display: flex;
+
+    gap: 5px;
+
+    flex-wrap: wrap;
+}
+
+
+.category {
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    color: #837786;
+
+    padding: 10px 12px;
+
+    border-radius: 9px;
+
+    font-size: 9px;
+}
+
+
+.category.active {
+
+    background: var(--purple-800);
+
+    color: white;
+
+    border-color: var(--purple-800);
+}
+
+
+.cart-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #a1959f;
+
+    font-size: 9px;
+
+    margin: 17px 0 11px;
+}
+
+
+.products-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+
+.product-card {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    overflow: hidden;
+
+    transition: .25s;
+}
+
+
+.product-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow);
+}
+
+
+.product-image {
+
+    height: 170px;
+
+    position: relative;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 55px;
+}
+
+
+.purple-product {
+
+    background:
+        linear-gradient(
+            145deg,
+            #ded3ea,
+            #c6bade
+        );
+}
+
+
+.cream-product {
+
+    background:
+        linear-gradient(
+            145deg,
+            #f3d9e5,
+            #e6bdd2
+        );
+}
+
+
+.blue-product {
+
+    background:
+        linear-gradient(
+            145deg,
+            #dbe5ea,
+            #c4d5dc
+        );
+}
+
+
+.green-product {
+
+    background:
+        linear-gradient(
+            145deg,
+            #dce9df,
+            #c7dbcc
+        );
+}
+
+
+.heart {
+
+    position: absolute;
+
+    right: 10px;
+
+    top: 10px;
+
+    width: 30px;
+
+    height: 30px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.72);
+
+    color: #756b7b;
+
+    font-size: 15px;
+}
+
+
+.condition {
+
+    position: absolute;
+
+    left: 10px;
+
+    bottom: 10px;
+
+    background:
+        rgba(255,255,255,.78);
+
+    backdrop-filter: blur(6px);
+
+    border-radius: 6px;
+
+    padding: 5px 7px;
+
+    color: #716776;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: .7px;
+}
+
+
+.product-info {
+
+    padding: 15px;
+}
+
+
+.product-category {
+
+    color: #a598a5;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    font-weight: 800;
+}
+
+
+.product-info h3 {
+
+    font-size: 12px;
+
+    line-height: 1.45;
+
+    margin: 7px 0;
+}
+
+
+.product-price {
+
+    color: var(--purple-800);
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    margin: 9px 0 13px;
+}
+
+
+.seller {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    border-top: 1px solid #f3ecf3;
+
+    padding-top: 11px;
+}
+
+
+.seller > div:nth-child(2) {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.seller strong {
+
+    display: block;
+
+    font-size: 8px;
+}
+
+
+.seller small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 7px;
+}
+
+
+.verified {
+
+    width: 17px;
+
+    height: 17px;
+
+    border-radius: 50%;
+
+    background: var(--green-light);
+
+    color: var(--green);
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 8px;
+}
+
+
+.contact-button {
+
+    width: 100%;
+
+    border: 1px solid #e9d3e0;
+
+    background: var(--purple-100);
+
+    color: var(--purple-800);
+
+    border-radius: 9px;
+
+    padding: 9px;
+
+    margin-top: 13px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   MESSAGES
+========================================= */
+
+.messages-layout {
+
+    height: 570px;
+
+    display: grid;
+
+    grid-template-columns: 300px 1fr;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.conversation-list {
+
+    border-right: 1px solid var(--border);
+
+    padding: 14px;
+}
+
+
+.conversation-search {
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: #faf8fb;
+
+    border-radius: 9px;
+
+    padding: 0 10px;
+
+    color: #a79cac;
+
+    margin-bottom: 10px;
+}
+
+
+.conversation-search input {
+
+    border: 0;
+
+    background: transparent;
+
+    width: 100%;
+
+    font-size: 9px;
+}
+
+
+.conversation {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 8px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+
+.conversation.active,
+.conversation:hover {
+
+    background: var(--purple-100);
+}
+
+
+.conversation > div:nth-child(2) {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.conversation strong {
+
+    display: block;
+
+    font-size: 9px;
+}
+
+
+.conversation p {
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.conversation > small {
+
+    color: #aea3ae;
+
+    font-size: 7px;
+}
+
+
+.chat-window {
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.chat-header {
+
+    height: 70px;
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 20px;
+}
+
+
+.chat-body {
+
+    flex: 1;
+
+    padding: 25px;
+
+    background: #fdfcfd;
+
+    overflow-y: auto;
+}
+
+
+.chat-date {
+
+    text-align: center;
+
+    color: #b4a8b6;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 20px;
+}
+
+
+.chat-message {
+
+    max-width: 55%;
+
+    padding: 11px 13px;
+
+    border-radius: 12px;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+
+    margin-bottom: 8px;
+}
+
+
+.chat-message.received {
+
+    background: #f3ecf6;
+
+    color: #574a5e;
+
+    border-bottom-left-radius: 3px;
+}
+
+
+.chat-message.sent {
+
+    background: var(--purple-800);
+
+    color: white;
+
+    margin-left: auto;
+
+    border-bottom-right-radius: 3px;
+}
+
+
+.chat-input {
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 13px;
+
+    border-top: 1px solid var(--border);
+}
+
+
+.chat-input input {
+
+    flex: 1;
+
+    border: 0;
+
+    background: #f8f6f9;
+
+    border-radius: 10px;
+
+    padding: 11px;
+
+    font-size: 9px;
+}
+
+
+.chat-input button {
+
+    width: 38px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: var(--purple-800);
+
+    color: white;
+}
+
+
+/* =========================================
+   SAVED
+========================================= */
+
+.saved-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+
+.saved-section {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 20px;
+}
+
+
+.saved-card {
+
+    margin-top: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    background: #faf8fb;
+
+    border-radius: 12px;
+}
+
+
+.saved-icon {
+
+    width: 39px;
+
+    height: 39px;
+
+    border-radius: 10px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: var(--purple-100);
+}
+
+
+.saved-icon.cream {
+
+    background: var(--gold-light);
+}
+
+
+.saved-card div:nth-child(2) {
+
+    flex: 1;
+}
+
+
+.saved-card strong {
+
+    display: block;
+
+    font-size: 10px;
+}
+
+
+.saved-card small {
+
+    color: var(--muted);
+
+    font-size: 8px;
+}
+
+
+.saved-card button {
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--purple-700);
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+.profile-cover {
+
+    min-height: 220px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            #ecc9da,
+            transparent 25%
+        ),
+        #f1ecf7;
+
+    border-radius: 23px;
+
+    padding: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.profile-large-avatar {
+
+    width: 85px;
+
+    height: 85px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple-800),
+            var(--purple-500)
+        );
+
+    color: white;
+
+    display: grid;
+
+    place-items: center;
+
+    font-weight: 700;
+
+    font-size: 21px;
+
+    box-shadow:
+        0 15px 30px
+        rgba(74,50,103,.2);
+}
+
+
+.profile-cover > div:nth-child(2) {
+
+    flex: 1;
+}
+
+
+.profile-cover h2 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 30px;
+
+    margin: 6px 0;
+}
+
+
+.profile-cover p {
+
+    color: #837786;
+
+    font-size: 10px;
+}
+
+
+.verified-badge {
+
+    display: inline-block;
+
+    background: var(--green-light);
+
+    color: var(--green);
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+
+    font-size: 7px;
+
+    letter-spacing: .7px;
+
+    font-weight: 800;
+}
+
+
+.profile-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    margin-top: 18px;
+}
+
+
+.profile-info-card {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 22px;
+}
+
+
+.profile-info-card > p {
+
+    font-size: 11px;
+
+    color: #7f7384;
+
+    line-height: 1.8;
+
+    max-width: 500px;
+}
+
+
+.skills {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: 15px;
+}
+
+
+.skills span {
+
+    background: var(--purple-100);
+
+    color: var(--purple-800);
+
+    border-radius: 7px;
+
+    padding: 6px 8px;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+
+.profile-stat-row {
+
+    display: flex;
+
+    gap: 30px;
+
+    margin-top: 18px;
+}
+
+
+.profile-stat-row strong {
+
+    display: block;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 27px;
+
+    color: var(--purple-800);
+}
+
+
+.profile-stat-row small {
+
+    color: var(--muted);
+
+    font-size: 8px;
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(36, 21, 54, .5);
+
+    backdrop-filter: blur(7px);
+
+    z-index: 100;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+.modal-overlay.show {
+
+    display: flex;
+
+    animation:
+        fadeIn .2s ease;
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+.modal {
+
+    width: 500px;
+
+    max-width: 100%;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 23px;
+
+    padding: 28px;
+
+    position: relative;
+
+    box-shadow:
+        0 30px 80px
+        rgba(30, 15, 40, .28);
+
+    animation:
+        modalIn .25s ease;
+}
+
+
+@keyframes modalIn {
+
+    from {
+        transform: translateY(15px) scale(.98);
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+.modal-close {
+
+    position: absolute;
+
+    right: 17px;
+
+    top: 17px;
+
+    width: 30px;
+
+    height: 30px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #f6f1f4;
+
+    color: #817785;
+
+    font-size: 18px;
+}
+
+
+.modal h2 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 27px;
+
+    margin: 5px 0;
+}
+
+
+.modal > p {
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+.modal label {
+
+    display: block;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    margin: 14px 0 6px;
+}
+
+
+.modal input,
+.modal textarea,
+.modal select {
+
+    width: 100%;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    padding: 11px 12px;
+
+    font-size: 10px;
+
+    resize: vertical;
+}
+
+
+.modal input:focus,
+.modal textarea:focus,
+.modal select:focus {
+
+    border-color:
+        var(--purple-500);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(74,50,103,.1);
+}
+
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .main {
+
+        padding: 25px;
+    }
+
+
+    .hero-visual {
+
+        opacity: .75;
+
+        right: -40px;
+    }
+
+
+    .products-grid {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+
+        width: 210px;
+    }
+
+
+    .main {
+
+        margin-left: 210px;
+    }
+
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .products-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .hero-visual {
+
+        opacity: .25;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .sidebar {
+
+        display: none;
+    }
+
+
+    .mobile-header {
+
+        height: 65px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 0 18px;
+
+        background: white;
+
+        border-bottom: 1px solid var(--border);
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 60;
+    }
+
+
+    .mobile-header button {
+
+        border: 0;
+
+        background: var(--purple-100);
+
+        color: var(--purple-800);
+
+        width: 35px;
+
+        height: 35px;
+
+        border-radius: 9px;
+    }
+
+
+    .main {
+
+        margin-left: 0;
+
+        padding: 20px 16px 40px;
+    }
+
+
+    .topbar {
+
+        margin-bottom: 20px;
+    }
+
+
+    .topbar h1 {
+
+        font-size: 23px;
+    }
+
+
+    .top-actions .icon-button,
+    .top-actions .notification-button {
+
+        display: none;
+    }
+
+
+    .hero {
+
+        min-height: 420px;
+
+        padding: 28px;
+    }
+
+
+    .hero h2 {
+
+        font-size: 38px;
+    }
+
+
+    .hero-visual {
+
+        display: none;
+    }
+
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .module-grid,
+    .saved-grid,
+    .profile-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .section-heading {
+
+        align-items: start;
+
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+
+    .page-hero {
+
+        padding: 26px;
+
+        min-height: 250px;
+
+        flex-direction: column;
+
+        align-items: start;
+
+        justify-content: end;
+
+        gap: 20px;
+    }
+
+
+    .page-hero h2 {
+
+        font-size: 34px;
+    }
+
+
+    .study-toolbar,
+    .cart-toolbar {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .category-buttons {
+
+        overflow-x: auto;
+
+        flex-wrap: nowrap;
+    }
+
+
+    .products-grid {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .messages-layout {
+
+        grid-template-columns: 1fr;
+
+        height: auto;
+    }
+
+
+    .conversation-list {
+
+        display: none;
+    }
+
+
+    .chat-window {
+
+        min-height: 560px;
+    }
+
+
+    .profile-cover {
+
+        flex-wrap: wrap;
+    }
+
+
+    .profile-cover > .button {
+
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .products-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .module-card {
+
+        min-height: 230px;
+    }
+
+
+    .question-item {
+
+        grid-template-columns: 38px 1fr;
+    }
+
+
+    .question-item .small-arrow {
+
+        display: none;
+    }
+
+
+    .question-content p {
+
+        white-space: normal;
+    }
+
+
+    .large-question-footer {
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+        flex-direction: column;
+    }
+
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+</style>
 </head>
 
 <body>
@@ -48,65 +3509,39 @@
         </div>
 
         <button class="nav-item active" data-page="home">
-
             <span class="nav-icon">⌂</span>
-
             <span>Overview</span>
-
         </button>
-
 
         <button class="nav-item" data-page="study">
-
             <span class="nav-icon">✎</span>
-
             <span>Study Buddy</span>
-
             <span class="nav-badge">12</span>
-
         </button>
-
 
         <button class="nav-item" data-page="cart">
-
             <span class="nav-icon">◫</span>
-
             <span>Campus Cart</span>
-
         </button>
-
 
         <button class="nav-item" data-page="messages">
-
             <span class="nav-icon">○</span>
-
             <span>Messages</span>
-
             <span class="nav-badge purple">3</span>
-
         </button>
-
 
         <div class="nav-label second">
             PERSONAL
         </div>
 
-
         <button class="nav-item" data-page="saved">
-
             <span class="nav-icon">♡</span>
-
             <span>Saved</span>
-
         </button>
 
-
         <button class="nav-item" data-page="profile">
-
             <span class="nav-icon">◯</span>
-
             <span>My Profile</span>
-
         </button>
 
     </nav>
@@ -115,48 +3550,20 @@
     <div class="sidebar-bottom">
 
         <div class="campus-card">
-
-            <div class="campus-card-icon">
-                ✓
-            </div>
-
+            <div class="campus-card-icon">✓</div>
             <div>
-
-                <strong>
-                    Verified campus
-                </strong>
-
-                <small>
-                    MIT College
-                </small>
-
+                <strong>Verified campus</strong>
+                <small>MIT College</small>
             </div>
-
         </div>
 
-
         <div class="sidebar-user">
-
-            <div class="avatar">
-                SK
-            </div>
-
+            <div class="avatar">SK</div>
             <div class="sidebar-user-info">
-
-                <strong>
-                    Soham Kedar
-                </strong>
-
-                <small>
-                    CSE · 2nd Year
-                </small>
-
+                <strong>Soham Kedar</strong>
+                <small>CSE · 2nd Year</small>
             </div>
-
-            <button class="more-btn">
-                •••
-            </button>
-
+            <button class="more-btn">•••</button>
         </div>
 
     </div>
@@ -171,20 +3578,13 @@
 <header class="mobile-header">
 
     <div class="brand">
-
-        <div class="brand-mark">
-            ✦
-        </div>
-
+        <div class="brand-mark">✦</div>
         <div class="brand-name">
             Campus<span>Connect</span>
         </div>
-
     </div>
 
-    <button id="mobileMenu">
-        ☰
-    </button>
+    <button id="mobileMenu">☰</button>
 
 </header>
 
@@ -195,45 +3595,17 @@
 
 <main class="main">
 
-    <!-- TOP BAR -->
-
     <header class="topbar">
 
         <div>
-
-            <div class="eyebrow">
-                THURSDAY · AUGUST 14, 2026
-            </div>
-
-            <h1 id="pageTitle">
-                Good morning, Soham.
-            </h1>
-
+            <div class="eyebrow">THURSDAY · AUGUST 14, 2026</div>
+            <h1 id="pageTitle">Good morning, Soham.</h1>
         </div>
 
-
         <div class="top-actions">
-
-            <button class="icon-button">
-
-                <span>⌕</span>
-
-            </button>
-
-
-            <button class="notification-button">
-
-                <span>♧</span>
-
-                <i></i>
-
-            </button>
-
-
-            <div class="top-avatar">
-                SK
-            </div>
-
+            <button class="icon-button"><span>⌕</span></button>
+            <button class="notification-button"><span>♧</span><i></i></button>
+            <div class="top-avatar">SK</div>
         </div>
 
     </header>
@@ -245,9 +3617,6 @@
 
     <section class="page active" id="home">
 
-
-        <!-- HERO -->
-
         <div class="hero">
 
             <div class="hero-content">
@@ -257,12 +3626,10 @@
                     YOUR CAMPUS, CONNECTED
                 </div>
 
-
                 <h2>
                     Find your people.<br>
                     <em>Learn & trade together.</em>
                 </h2>
-
 
                 <p>
                     One trusted space to find study partners,
@@ -270,94 +3637,44 @@
                     campus essentials a second life.
                 </p>
 
-
                 <div class="hero-buttons">
-
-                    <button
-                        class="button button-light"
-                        data-go="study">
-
+                    <button class="button button-light" data-go="study">
                         Explore Study Buddy
                         <span>→</span>
-
                     </button>
-
-
-                    <button
-                        class="button button-outline"
-                        data-go="cart">
-
+                    <button class="button button-outline" data-go="cart">
                         Browse Campus Cart
-
                     </button>
-
                 </div>
 
             </div>
-
 
             <div class="hero-visual">
 
                 <div class="orb orb-one"></div>
                 <div class="orb orb-two"></div>
 
-
                 <div class="floating-card note-card">
-
-                    <div class="floating-icon lavender">
-                        ✎
-                    </div>
-
+                    <div class="floating-icon lavender">✎</div>
                     <div>
-
-                        <strong>
-                            Study Buddy
-                        </strong>
-
-                        <small>
-                            128 active students
-                        </small>
-
+                        <strong>Study Buddy</strong>
+                        <small>128 active students</small>
                     </div>
-
                 </div>
-
 
                 <div class="floating-card cart-card">
-
-                    <div class="floating-icon cream">
-                        ◫
-                    </div>
-
+                    <div class="floating-icon cream">◫</div>
                     <div>
-
-                        <strong>
-                            Campus Cart
-                        </strong>
-
-                        <small>
-                            42 new listings
-                        </small>
-
+                        <strong>Campus Cart</strong>
+                        <small>42 new listings</small>
                     </div>
-
                 </div>
 
-
                 <div class="hero-circle">
-
                     <div class="circle-inner">
-
-                        <span>
-                            ✦
-                        </span>
-
-                        <strong>
-                            Connect
-                        </strong>
-
+                        <span>✦</span>
+                        <strong>Connect</strong>
                     </div>
-
                 </div>
 
             </div>
@@ -365,134 +3682,65 @@
         </div>
 
 
-        <!-- QUICK MODULES -->
-
         <div class="section-heading">
-
             <div>
-
-                <span class="section-kicker">
-                    EXPLORE
-                </span>
-
-                <h3>
-                    Your campus, two ways
-                </h3>
-
+                <span class="section-kicker">EXPLORE</span>
+                <h3>Your campus, two ways</h3>
             </div>
-
-            <span class="section-note">
-                Everything starts with a connection.
-            </span>
-
+            <span class="section-note">Everything starts with a connection.</span>
         </div>
 
 
         <div class="module-grid">
 
-
-            <article
-                class="module-card study-module"
-                data-go="study">
+            <article class="module-card study-module" data-go="study">
 
                 <div class="module-top">
-
-                    <div class="module-icon">
-                        ✎
-                    </div>
-
-                    <span class="arrow-circle">
-                        ↗
-                    </span>
-
+                    <div class="module-icon">✎</div>
+                    <span class="arrow-circle">↗</span>
                 </div>
 
-
-                <span class="module-label">
-                    LEARN · SHARE · CONNECT
-                </span>
-
-                <h3>
-                    Study Buddy
-                </h3>
-
+                <span class="module-label">LEARN · SHARE · CONNECT</span>
+                <h3>Study Buddy</h3>
                 <p>
                     Find students who actually know
                     the subject. Ask doubts, share notes,
                     and learn together.
                 </p>
 
-
                 <div class="module-footer">
-
                     <div class="mini-avatars">
-
                         <span>AP</span>
                         <span>RK</span>
                         <span>VM</span>
                         <span>+9</span>
-
                     </div>
-
-                    <span>
-                        12 questions today
-                    </span>
-
+                    <span>12 questions today</span>
                 </div>
 
             </article>
 
 
-            <article
-                class="module-card cart-module"
-                data-go="cart">
+            <article class="module-card cart-module" data-go="cart">
 
                 <div class="module-top">
-
-                    <div class="module-icon">
-                        ◫
-                    </div>
-
-                    <span class="arrow-circle">
-                        ↗
-                    </span>
-
+                    <div class="module-icon">◫</div>
+                    <span class="arrow-circle">↗</span>
                 </div>
 
-
-                <span class="module-label">
-                    BUY · SELL · REUSE
-                </span>
-
-                <h3>
-                    Campus Cart
-                </h3>
-
+                <span class="module-label">BUY · SELL · REUSE</span>
+                <h3>Campus Cart</h3>
                 <p>
                     Give textbooks, calculators,
                     stationery and lab equipment
                     a second life within your campus.
                 </p>
 
-
                 <div class="module-footer">
-
-                    <div class="mini-product">
-                        📚
-                    </div>
-
-                    <div class="mini-product">
-                        🧮
-                    </div>
-
-                    <div class="mini-product">
-                        🎧
-                    </div>
-
-                    <span>
-                        42 new listings
-                    </span>
-
+                    <div class="mini-product">📚</div>
+                    <div class="mini-product">🧮</div>
+                    <div class="mini-product">🎧</div>
+                    <span>42 new listings</span>
                 </div>
 
             </article>
@@ -500,184 +3748,66 @@
         </div>
 
 
-        <!-- LOWER CONTENT -->
-
         <div class="dashboard-grid">
-
-
-            <!-- QUESTIONS -->
 
             <div class="content-panel">
 
                 <div class="panel-header">
-
                     <div>
-
-                        <span class="section-kicker">
-                            STUDY BUDDY
-                        </span>
-
-                        <h3>
-                            Questions needing you
-                        </h3>
-
+                        <span class="section-kicker">STUDY BUDDY</span>
+                        <h3>Questions needing you</h3>
                     </div>
-
-                    <button
-                        class="text-button"
-                        data-go="study">
-
-                        View all →
-
-                    </button>
-
+                    <button class="text-button" data-go="study">View all →</button>
                 </div>
-
 
                 <div class="question-list">
 
-
                     <article class="question-item">
-
-                        <div class="question-subject">
-                            JAVA
-                        </div>
-
+                        <div class="question-subject">JAVA</div>
                         <div class="question-content">
-
-                            <h4>
-                                Can someone explain
-                                multilevel inheritance?
-                            </h4>
-
-                            <p>
-                                I'm confused about how
-                                constructors behave...
-                            </p>
-
+                            <h4>Can someone explain multilevel inheritance?</h4>
+                            <p>I'm confused about how constructors behave...</p>
                             <div class="question-meta">
-
-                                <span>
-                                    Rahul Sharma
-                                </span>
-
-                                <span>
-                                    ·
-                                </span>
-
-                                <span>
-                                    4 answers
-                                </span>
-
-                                <span>
-                                    ·
-                                </span>
-
-                                <span>
-                                    8 min ago
-                                </span>
-
+                                <span>Rahul Sharma</span>
+                                <span>·</span>
+                                <span>4 answers</span>
+                                <span>·</span>
+                                <span>8 min ago</span>
                             </div>
-
                         </div>
-
-                        <button class="small-arrow">
-                            →
-                        </button>
-
+                        <button class="small-arrow">→</button>
                     </article>
 
-
                     <article class="question-item">
-
-                        <div class="question-subject dbms">
-                            DBMS
-                        </div>
-
+                        <div class="question-subject dbms">DBMS</div>
                         <div class="question-content">
-
-                            <h4>
-                                Normalization in simple words?
-                            </h4>
-
-                            <p>
-                                Looking for a simple example
-                                of 1NF, 2NF and 3NF.
-                            </p>
-
+                            <h4>Normalization in simple words?</h4>
+                            <p>Looking for a simple example of 1NF, 2NF and 3NF.</p>
                             <div class="question-meta">
-
-                                <span>
-                                    Ananya Patil
-                                </span>
-
+                                <span>Ananya Patil</span>
                                 <span>·</span>
-
-                                <span>
-                                    7 answers
-                                </span>
-
+                                <span>7 answers</span>
                                 <span>·</span>
-
-                                <span>
-                                    21 min ago
-                                </span>
-
+                                <span>21 min ago</span>
                             </div>
-
                         </div>
-
-                        <button class="small-arrow">
-                            →
-                        </button>
-
+                        <button class="small-arrow">→</button>
                     </article>
 
-
                     <article class="question-item">
-
-                        <div class="question-subject graphics">
-                            CG
-                        </div>
-
+                        <div class="question-subject graphics">CG</div>
                         <div class="question-content">
-
-                            <h4>
-                                DDA line algorithm
-                                calculation
-                            </h4>
-
-                            <p>
-                                How do we calculate the
-                                intermediate points?
-                            </p>
-
+                            <h4>DDA line algorithm calculation</h4>
+                            <p>How do we calculate the intermediate points?</p>
                             <div class="question-meta">
-
-                                <span>
-                                    Vivek Kumar
-                                </span>
-
+                                <span>Vivek Kumar</span>
                                 <span>·</span>
-
-                                <span>
-                                    3 answers
-                                </span>
-
+                                <span>3 answers</span>
                                 <span>·</span>
-
-                                <span>
-                                    42 min ago
-                                </span>
-
+                                <span>42 min ago</span>
                             </div>
-
                         </div>
-
-                        <button class="small-arrow">
-                            →
-                        </button>
-
+                        <button class="small-arrow">→</button>
                     </article>
 
                 </div>
@@ -685,144 +3815,47 @@
             </div>
 
 
-            <!-- ACTIVITY -->
-
             <div class="content-panel activity-panel">
 
                 <div class="panel-header">
-
                     <div>
-
-                        <span class="section-kicker">
-                            YOUR ACTIVITY
-                        </span>
-
-                        <h3>
-                            This week
-                        </h3>
-
+                        <span class="section-kicker">YOUR ACTIVITY</span>
+                        <h3>This week</h3>
                     </div>
-
-                    <span class="activity-date">
-                        Aug 08 — 14
-                    </span>
-
+                    <span class="activity-date">Aug 08 — 14</span>
                 </div>
-
 
                 <div class="stats">
 
                     <div class="stat">
-
-                        <span class="stat-icon purple">
-                            ✎
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                8
-                            </strong>
-
-                            <small>
-                                Questions
-                            </small>
-
-                        </div>
-
+                        <span class="stat-icon purple">✎</span>
+                        <div><strong>8</strong><small>Questions</small></div>
                     </div>
 
-
                     <div class="stat">
-
-                        <span class="stat-icon green">
-                            ✓
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                14
-                            </strong>
-
-                            <small>
-                                Answers
-                            </small>
-
-                        </div>
-
+                        <span class="stat-icon green">✓</span>
+                        <div><strong>14</strong><small>Answers</small></div>
                     </div>
 
-
                     <div class="stat">
-
-                        <span class="stat-icon gold">
-                            ◫
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                3
-                            </strong>
-
-                            <small>
-                                Listings
-                            </small>
-
-                        </div>
-
+                        <span class="stat-icon gold">◫</span>
+                        <div><strong>3</strong><small>Listings</small></div>
                     </div>
 
-
                     <div class="stat">
-
-                        <span class="stat-icon rose">
-                            ♡
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                6
-                            </strong>
-
-                            <small>
-                                Saved
-                            </small>
-
-                        </div>
-
+                        <span class="stat-icon rose">♡</span>
+                        <div><strong>6</strong><small>Saved</small></div>
                     </div>
 
                 </div>
 
-
                 <div class="progress-area">
-
                     <div class="progress-heading">
-
-                        <span>
-                            Campus contribution
-                        </span>
-
-                        <strong>
-                            78%
-                        </strong>
-
+                        <span>Campus contribution</span>
+                        <strong>78%</strong>
                     </div>
-
-                    <div class="progress">
-
-                        <span></span>
-
-                    </div>
-
-                    <p>
-                        You're in the top 12% of
-                        helpful students this week.
-                    </p>
-
+                    <div class="progress"><span></span></div>
+                    <p>You're in the top 12% of helpful students this week.</p>
                 </div>
 
             </div>
@@ -841,91 +3874,36 @@
         <div class="page-hero purple-page">
 
             <div>
-
-                <span class="section-kicker">
-                    STUDY BUDDY
-                </span>
-
-                <h2>
-                    Learn with people<br>
-                    <em>who get it.</em>
-                </h2>
-
-                <p>
-                    Ask questions, share knowledge,
-                    find prepared peers and discover
-                    useful study material.
-                </p>
-
+                <span class="section-kicker">STUDY BUDDY</span>
+                <h2>Learn with people<br><em>who get it.</em></h2>
+                <p>Ask questions, share knowledge, find prepared peers and discover useful study material.</p>
             </div>
 
-
-            <button
-                class="button button-dark"
-                id="askQuestionButton">
-
-                + Ask a doubt
-
-            </button>
+            <button class="button button-dark" id="askQuestionButton">+ Ask a doubt</button>
 
         </div>
 
 
         <div class="study-tabs">
-
-            <button class="tab active">
-                Questions
-            </button>
-
-            <button class="tab">
-                Study Resources
-            </button>
-
-            <button class="tab">
-                Find Study Buddies
-            </button>
-
+            <button class="tab active">Questions</button>
+            <button class="tab">Study Resources</button>
+            <button class="tab">Find Study Buddies</button>
         </div>
 
 
         <div class="study-toolbar">
 
             <div class="search-box">
-
-                <span>
-                    ⌕
-                </span>
-
-                <input
-                    type="text"
-                    placeholder="Search questions, subjects or topics..."
-                    id="questionSearch">
-
+                <span>⌕</span>
+                <input type="text" placeholder="Search questions, subjects or topics..." id="questionSearch">
             </div>
 
-
             <select id="subjectFilter">
-
-                <option value="all">
-                    All subjects
-                </option>
-
-                <option value="java">
-                    Java
-                </option>
-
-                <option value="dbms">
-                    DBMS
-                </option>
-
-                <option value="graphics">
-                    Computer Graphics
-                </option>
-
-                <option value="python">
-                    Python
-                </option>
-
+                <option value="all">All subjects</option>
+                <option value="java">Java</option>
+                <option value="dbms">DBMS</option>
+                <option value="graphics">Computer Graphics</option>
+                <option value="python">Python</option>
             </select>
 
         </div>
@@ -933,203 +3911,61 @@
 
         <div class="questions-page-list" id="questionsContainer">
 
-
             <article class="large-question">
-
                 <div class="question-top">
-
-                    <span class="subject-pill">
-                        JAVA
-                    </span>
-
-                    <span class="question-time">
-                        8 min ago
-                    </span>
-
+                    <span class="subject-pill">JAVA</span>
+                    <span class="question-time">8 min ago</span>
                 </div>
-
-                <h3>
-                    Can someone explain
-                    multilevel inheritance in Java?
-                </h3>
-
-                <p>
-                    I understand single inheritance,
-                    but I'm confused about how the
-                    constructor chain works when there
-                    are multiple levels.
-                </p>
-
-
+                <h3>Can someone explain multilevel inheritance in Java?</h3>
+                <p>I understand single inheritance, but I'm confused about how the constructor chain works when there are multiple levels.</p>
                 <div class="large-question-footer">
-
                     <div class="person">
-
-                        <div class="avatar small">
-                            RS
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Rahul Sharma
-                            </strong>
-
-                            <small>
-                                CSE · 2nd Year
-                            </small>
-
-                        </div>
-
+                        <div class="avatar small">RS</div>
+                        <div><strong>Rahul Sharma</strong><small>CSE · 2nd Year</small></div>
                     </div>
-
-
                     <div class="question-actions">
-
-                        <span>
-                            4 answers
-                        </span>
-
-                        <button>
-                            Answer →
-                        </button>
-
+                        <span>4 answers</span>
+                        <button>Answer →</button>
                     </div>
-
                 </div>
-
             </article>
 
-
             <article class="large-question">
-
                 <div class="question-top">
-
-                    <span class="subject-pill dbms">
-                        DBMS
-                    </span>
-
-                    <span class="question-time">
-                        21 min ago
-                    </span>
-
+                    <span class="subject-pill dbms">DBMS</span>
+                    <span class="question-time">21 min ago</span>
                 </div>
-
-                <h3>
-                    Normalization explained with
-                    a practical example?
-                </h3>
-
-                <p>
-                    Can someone explain 1NF, 2NF
-                    and 3NF using a simple college
-                    database example?
-                </p>
-
-
+                <h3>Normalization explained with a practical example?</h3>
+                <p>Can someone explain 1NF, 2NF and 3NF using a simple college database example?</p>
                 <div class="large-question-footer">
-
                     <div class="person">
-
-                        <div class="avatar small">
-                            AP
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Ananya Patil
-                            </strong>
-
-                            <small>
-                                CSE · 3rd Year
-                            </small>
-
-                        </div>
-
+                        <div class="avatar small">AP</div>
+                        <div><strong>Ananya Patil</strong><small>CSE · 3rd Year</small></div>
                     </div>
-
-
                     <div class="question-actions">
-
-                        <span>
-                            7 answers
-                        </span>
-
-                        <button>
-                            Answer →
-                        </button>
-
+                        <span>7 answers</span>
+                        <button>Answer →</button>
                     </div>
-
                 </div>
-
             </article>
 
-
             <article class="large-question">
-
                 <div class="question-top">
-
-                    <span class="subject-pill graphics">
-                        GRAPHICS
-                    </span>
-
-                    <span class="question-time">
-                        42 min ago
-                    </span>
-
+                    <span class="subject-pill graphics">GRAPHICS</span>
+                    <span class="question-time">42 min ago</span>
                 </div>
-
-                <h3>
-                    DDA line drawing algorithm —
-                    how are intermediate points calculated?
-                </h3>
-
-                <p>
-                    I know the formula but I'm not sure
-                    how to calculate the intermediate
-                    pixel coordinates.
-                </p>
-
-
+                <h3>DDA line drawing algorithm — how are intermediate points calculated?</h3>
+                <p>I know the formula but I'm not sure how to calculate the intermediate pixel coordinates.</p>
                 <div class="large-question-footer">
-
                     <div class="person">
-
-                        <div class="avatar small">
-                            VK
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Vivek Kumar
-                            </strong>
-
-                            <small>
-                                CSE · 2nd Year
-                            </small>
-
-                        </div>
-
+                        <div class="avatar small">VK</div>
+                        <div><strong>Vivek Kumar</strong><small>CSE · 2nd Year</small></div>
                     </div>
-
-
                     <div class="question-actions">
-
-                        <span>
-                            3 answers
-                        </span>
-
-                        <button>
-                            Answer →
-                        </button>
-
+                        <span>3 answers</span>
+                        <button>Answer →</button>
                     </div>
-
                 </div>
-
             </article>
 
         </div>
@@ -1146,31 +3982,12 @@
         <div class="page-hero cart-page">
 
             <div>
-
-                <span class="section-kicker">
-                    CAMPUS CART
-                </span>
-
-                <h2>
-                    Give useful things<br>
-                    <em>a second life.</em>
-                </h2>
-
-                <p>
-                    Buy and resell academic essentials
-                    directly with students on your campus.
-                </p>
-
+                <span class="section-kicker">CAMPUS CART</span>
+                <h2>Give useful things<br><em>a second life.</em></h2>
+                <p>Buy and resell academic essentials directly with students on your campus.</p>
             </div>
 
-
-            <button
-                class="button button-dark"
-                id="sellItemButton">
-
-                + Sell an item
-
-            </button>
+            <button class="button button-dark" id="sellItemButton">+ Sell an item</button>
 
         </div>
 
@@ -1178,331 +3995,103 @@
         <div class="cart-toolbar">
 
             <div class="search-box">
-
                 <span>⌕</span>
-
-                <input
-                    type="text"
-                    placeholder="Search textbooks, calculators, lab equipment..."
-                    id="productSearch">
-
+                <input type="text" placeholder="Search textbooks, calculators, lab equipment..." id="productSearch">
             </div>
 
-
             <div class="category-buttons">
-
-                <button class="category active">
-                    All
-                </button>
-
-                <button class="category">
-                    Books
-                </button>
-
-                <button class="category">
-                    Electronics
-                </button>
-
-                <button class="category">
-                    Stationery
-                </button>
-
-                <button class="category">
-                    Lab Equipment
-                </button>
-
+                <button class="category active">All</button>
+                <button class="category">Books</button>
+                <button class="category">Electronics</button>
+                <button class="category">Stationery</button>
+                <button class="category">Lab Equipment</button>
             </div>
 
         </div>
 
 
         <div class="cart-info">
-
-            <span>
-                42 items available
-            </span>
-
-            <span>
-                Sorted by newest
-            </span>
-
+            <span>42 items available</span>
+            <span>Sorted by newest</span>
         </div>
 
 
         <div class="products-grid">
 
-
             <article class="product-card">
-
                 <div class="product-image purple-product">
-
-                    <span>
-                        📘
-                    </span>
-
-                    <button class="heart">
-                        ♡
-                    </button>
-
-                    <div class="condition">
-                        GOOD
-                    </div>
-
+                    <span>📘</span>
+                    <button class="heart">♡</button>
+                    <div class="condition">GOOD</div>
                 </div>
-
-
                 <div class="product-info">
-
-                    <span class="product-category">
-                        BOOKS
-                    </span>
-
-                    <h3>
-                        Java Programming
-                        — Herbert Schildt
-                    </h3>
-
-                    <div class="product-price">
-                        ₹300
-                    </div>
-
-
+                    <span class="product-category">BOOKS</span>
+                    <h3>Java Programming — Herbert Schildt</h3>
+                    <div class="product-price">₹300</div>
                     <div class="seller">
-
-                        <div class="avatar tiny">
-                            AP
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Ananya Patil
-                            </strong>
-
-                            <small>
-                                CSE · Library Block
-                            </small>
-
-                        </div>
-
-                        <span class="verified">
-                            ✓
-                        </span>
-
+                        <div class="avatar tiny">AP</div>
+                        <div><strong>Ananya Patil</strong><small>CSE · Library Block</small></div>
+                        <span class="verified">✓</span>
                     </div>
-
-
-                    <button class="contact-button">
-                        Contact seller
-                    </button>
-
+                    <button class="contact-button">Contact seller</button>
                 </div>
-
             </article>
 
-
             <article class="product-card">
-
                 <div class="product-image cream-product">
-
-                    <span>
-                        🧮
-                    </span>
-
-                    <button class="heart">
-                        ♡
-                    </button>
-
-                    <div class="condition">
-                        GOOD
-                    </div>
-
+                    <span>🧮</span>
+                    <button class="heart">♡</button>
+                    <div class="condition">GOOD</div>
                 </div>
-
-
                 <div class="product-info">
-
-                    <span class="product-category">
-                        CALCULATOR
-                    </span>
-
-                    <h3>
-                        Casio FX-991ES
-                        Scientific Calculator
-                    </h3>
-
-                    <div class="product-price">
-                        ₹500
-                    </div>
-
-
+                    <span class="product-category">CALCULATOR</span>
+                    <h3>Casio FX-991ES Scientific Calculator</h3>
+                    <div class="product-price">₹500</div>
                     <div class="seller">
-
-                        <div class="avatar tiny">
-                            RS
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Rahul Sharma
-                            </strong>
-
-                            <small>
-                                CSE · Hostel A
-                            </small>
-
-                        </div>
-
-                        <span class="verified">
-                            ✓
-                        </span>
-
+                        <div class="avatar tiny">RS</div>
+                        <div><strong>Rahul Sharma</strong><small>CSE · Hostel A</small></div>
+                        <span class="verified">✓</span>
                     </div>
-
-
-                    <button class="contact-button">
-                        Contact seller
-                    </button>
-
+                    <button class="contact-button">Contact seller</button>
                 </div>
-
             </article>
 
-
             <article class="product-card">
-
                 <div class="product-image blue-product">
-
-                    <span>
-                        🎧
-                    </span>
-
-                    <button class="heart">
-                        ♡
-                    </button>
-
-                    <div class="condition">
-                        LIKE NEW
-                    </div>
-
+                    <span>🎧</span>
+                    <button class="heart">♡</button>
+                    <div class="condition">LIKE NEW</div>
                 </div>
-
-
                 <div class="product-info">
-
-                    <span class="product-category">
-                        ELECTRONICS
-                    </span>
-
-                    <h3>
-                        Wireless Headphones
-                    </h3>
-
-                    <div class="product-price">
-                        ₹800
-                    </div>
-
-
+                    <span class="product-category">ELECTRONICS</span>
+                    <h3>Wireless Headphones</h3>
+                    <div class="product-price">₹800</div>
                     <div class="seller">
-
-                        <div class="avatar tiny">
-                            VK
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Vivek Kumar
-                            </strong>
-
-                            <small>
-                                IT · Hostel B
-                            </small>
-
-                        </div>
-
-                        <span class="verified">
-                            ✓
-                        </span>
-
+                        <div class="avatar tiny">VK</div>
+                        <div><strong>Vivek Kumar</strong><small>IT · Hostel B</small></div>
+                        <span class="verified">✓</span>
                     </div>
-
-
-                    <button class="contact-button">
-                        Contact seller
-                    </button>
-
+                    <button class="contact-button">Contact seller</button>
                 </div>
-
             </article>
 
-
             <article class="product-card">
-
                 <div class="product-image green-product">
-
-                    <span>
-                        🔬
-                    </span>
-
-                    <button class="heart">
-                        ♡
-                    </button>
-
-                    <div class="condition">
-                        USED
-                    </div>
-
+                    <span>🔬</span>
+                    <button class="heart">♡</button>
+                    <div class="condition">USED</div>
                 </div>
-
-
                 <div class="product-info">
-
-                    <span class="product-category">
-                        LAB EQUIPMENT
-                    </span>
-
-                    <h3>
-                        Digital Multimeter
-                    </h3>
-
-                    <div class="product-price">
-                        ₹650
-                    </div>
-
-
+                    <span class="product-category">LAB EQUIPMENT</span>
+                    <h3>Digital Multimeter</h3>
+                    <div class="product-price">₹650</div>
                     <div class="seller">
-
-                        <div class="avatar tiny">
-                            AM
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Amit More
-                            </strong>
-
-                            <small>
-                                E&TC · Lab Block
-                            </small>
-
-                        </div>
-
-                        <span class="verified">
-                            ✓
-                        </span>
-
+                        <div class="avatar tiny">AM</div>
+                        <div><strong>Amit More</strong><small>E&TC · Lab Block</small></div>
+                        <span class="verified">✓</span>
                     </div>
-
-
-                    <button class="contact-button">
-                        Contact seller
-                    </button>
-
+                    <button class="contact-button">Contact seller</button>
                 </div>
-
             </article>
 
         </div>
@@ -1517,22 +4106,11 @@
     <section class="page" id="messages">
 
         <div class="page-hero simple-page">
-
             <div>
-
-                <span class="section-kicker">
-                    MESSAGES
-                </span>
-
-                <h2>
-                    Conversations that<br>
-                    <em>move things forward.</em>
-                </h2>
-
+                <span class="section-kicker">MESSAGES</span>
+                <h2>Conversations that<br><em>move things forward.</em></h2>
             </div>
-
         </div>
-
 
         <div class="messages-layout">
 
@@ -1540,168 +4118,62 @@
 
                 <div class="conversation-search">
                     ⌕
-                    <input
-                        placeholder="Search conversations">
+                    <input placeholder="Search conversations">
                 </div>
-
 
                 <div class="conversation active">
-
-                    <div class="avatar">
-                        AP
-                    </div>
-
+                    <div class="avatar">AP</div>
                     <div>
-
-                        <strong>
-                            Ananya Patil
-                        </strong>
-
-                        <p>
-                            I can send you the notes...
-                        </p>
-
+                        <strong>Ananya Patil</strong>
+                        <p>I can send you the notes...</p>
                     </div>
-
-                    <small>
-                        10:32
-                    </small>
-
+                    <small>10:32</small>
                 </div>
 
-
                 <div class="conversation">
-
-                    <div class="avatar">
-                        RS
-                    </div>
-
+                    <div class="avatar">RS</div>
                     <div>
-
-                        <strong>
-                            Rahul Sharma
-                        </strong>
-
-                        <p>
-                            Is the calculator available?
-                        </p>
-
+                        <strong>Rahul Sharma</strong>
+                        <p>Is the calculator available?</p>
                     </div>
-
-                    <small>
-                        Yesterday
-                    </small>
-
+                    <small>Yesterday</small>
                 </div>
 
-
                 <div class="conversation">
-
-                    <div class="avatar">
-                        VK
-                    </div>
-
+                    <div class="avatar">VK</div>
                     <div>
-
-                        <strong>
-                            Vivek Kumar
-                        </strong>
-
-                        <p>
-                            Thanks for explaining!
-                        </p>
-
+                        <strong>Vivek Kumar</strong>
+                        <p>Thanks for explaining!</p>
                     </div>
-
-                    <small>
-                        Tue
-                    </small>
-
+                    <small>Tue</small>
                 </div>
 
             </div>
 
-
             <div class="chat-window">
 
                 <div class="chat-header">
-
                     <div class="person">
-
-                        <div class="avatar">
-                            AP
-                        </div>
-
+                        <div class="avatar">AP</div>
                         <div>
-
-                            <strong>
-                                Ananya Patil
-                            </strong>
-
-                            <small>
-                                CSE · 3rd Year · Online
-                            </small>
-
+                            <strong>Ananya Patil</strong>
+                            <small>CSE · 3rd Year · Online</small>
                         </div>
-
                     </div>
-
-                    <button class="icon-button">
-                        •••
-                    </button>
-
+                    <button class="icon-button">•••</button>
                 </div>
 
-
-                <div class="chat-body">
-
-                    <div class="chat-date">
-                        TODAY
-                    </div>
-
-
-                    <div class="chat-message received">
-
-                        Hey! I saw your question
-                        about DBMS normalization.
-
-                    </div>
-
-
-                    <div class="chat-message received">
-
-                        I have handwritten notes
-                        from last semester. They might help.
-
-                    </div>
-
-
-                    <div class="chat-message sent">
-
-                        That would be amazing!
-                        Thank you so much 🙌
-
-                    </div>
-
-
-                    <div class="chat-message sent">
-
-                        Can you share them here?
-
-                    </div>
-
+                <div class="chat-body" id="chatBody">
+                    <div class="chat-date">TODAY</div>
+                    <div class="chat-message received">Hey! I saw your question about DBMS normalization.</div>
+                    <div class="chat-message received">I have handwritten notes from last semester. They might help.</div>
+                    <div class="chat-message sent">That would be amazing! Thank you so much 🙌</div>
+                    <div class="chat-message sent">Can you share them here?</div>
                 </div>
-
 
                 <div class="chat-input">
-
-                    <input
-                        placeholder="Write a message...">
-
-                    <button>
-                        ↑
-                    </button>
-
+                    <input placeholder="Write a message..." id="chatInput">
+                    <button id="chatSend">↑</button>
                 </div>
 
             </div>
@@ -1718,88 +4190,36 @@
     <section class="page" id="saved">
 
         <div class="page-hero simple-page">
-
             <div>
-
-                <span class="section-kicker">
-                    SAVED
-                </span>
-
-                <h2>
-                    Things worth<br>
-                    <em>coming back to.</em>
-                </h2>
-
+                <span class="section-kicker">SAVED</span>
+                <h2>Things worth<br><em>coming back to.</em></h2>
             </div>
-
         </div>
-
 
         <div class="saved-grid">
 
             <div class="saved-section">
-
-                <span class="section-kicker">
-                    STUDY RESOURCES
-                </span>
-
+                <span class="section-kicker">STUDY RESOURCES</span>
                 <div class="saved-card">
-
-                    <div class="saved-icon">
-                        📄
-                    </div>
-
+                    <div class="saved-icon">📄</div>
                     <div>
-
-                        <strong>
-                            Java OOP Handwritten Notes
-                        </strong>
-
-                        <small>
-                            Java · 2nd Year
-                        </small>
-
+                        <strong>Java OOP Handwritten Notes</strong>
+                        <small>Java · 2nd Year</small>
                     </div>
-
-                    <button>
-                        →
-                    </button>
-
+                    <button>→</button>
                 </div>
-
             </div>
 
-
             <div class="saved-section">
-
-                <span class="section-kicker">
-                    CAMPUS CART
-                </span>
-
+                <span class="section-kicker">CAMPUS CART</span>
                 <div class="saved-card">
-
-                    <div class="saved-icon cream">
-                        🧮
-                    </div>
-
+                    <div class="saved-icon cream">🧮</div>
                     <div>
-
-                        <strong>
-                            Casio FX-991ES
-                        </strong>
-
-                        <small>
-                            ₹500 · Good condition
-                        </small>
-
+                        <strong>Casio FX-991ES</strong>
+                        <small>₹500 · Good condition</small>
                     </div>
-
-                    <button>
-                        →
-                    </button>
-
+                    <button>→</button>
                 </div>
-
             </div>
 
         </div>
@@ -1815,84 +4235,38 @@
 
         <div class="profile-cover">
 
-            <div class="profile-large-avatar">
-                SK
-            </div>
+            <div class="profile-large-avatar">SK</div>
 
             <div>
-
-                <span class="verified-badge">
-                    ✓ VERIFIED STUDENT
-                </span>
-
-                <h2>
-                    Soham Kedar
-                </h2>
-
-                <p>
-                    Computer Science · 2nd Year
-                </p>
-
+                <span class="verified-badge">✓ VERIFIED STUDENT</span>
+                <h2>Soham Kedar</h2>
+                <p>Computer Science · 2nd Year</p>
             </div>
 
-            <button class="button button-dark">
-                Edit profile
-            </button>
+            <button class="button button-dark">Edit profile</button>
 
         </div>
-
 
         <div class="profile-grid">
 
             <div class="profile-info-card">
-
-                <span class="section-kicker">
-                    ABOUT
-                </span>
-
-                <p>
-                    Interested in programming,
-                    data science and helping other
-                    students learn.
-                </p>
-
+                <span class="section-kicker">ABOUT</span>
+                <p>Interested in programming, data science and helping other students learn.</p>
                 <div class="skills">
-
                     <span>Java</span>
                     <span>Python</span>
                     <span>MongoDB</span>
                     <span>Web Development</span>
-
                 </div>
-
             </div>
 
-
             <div class="profile-info-card">
-
-                <span class="section-kicker">
-                    CAMPUS ACTIVITY
-                </span>
-
+                <span class="section-kicker">CAMPUS ACTIVITY</span>
                 <div class="profile-stat-row">
-
-                    <div>
-                        <strong>8</strong>
-                        <small>Questions</small>
-                    </div>
-
-                    <div>
-                        <strong>14</strong>
-                        <small>Answers</small>
-                    </div>
-
-                    <div>
-                        <strong>3</strong>
-                        <small>Listings</small>
-                    </div>
-
+                    <div><strong>8</strong><small>Questions</small></div>
+                    <div><strong>14</strong><small>Answers</small></div>
+                    <div><strong>3</strong><small>Listings</small></div>
                 </div>
-
             </div>
 
         </div>
@@ -1907,83 +4281,28 @@
 ========================================= -->
 
 <div class="modal-overlay" id="questionModal">
-
     <div class="modal">
+        <button class="modal-close" data-close>×</button>
+        <span class="section-kicker">STUDY BUDDY</span>
+        <h2>Ask your doubt</h2>
+        <p>Someone on your campus might already know the answer.</p>
 
-        <button
-            class="modal-close"
-            data-close>
-            ×
-        </button>
+        <label>Question</label>
+        <input type="text" placeholder="What do you want to know?">
 
-        <span class="section-kicker">
-            STUDY BUDDY
-        </span>
-
-        <h2>
-            Ask your doubt
-        </h2>
-
-        <p>
-            Someone on your campus might
-            already know the answer.
-        </p>
-
-
-        <label>
-            Question
-        </label>
-
-        <input
-            type="text"
-            placeholder="What do you want to know?">
-
-
-        <label>
-            Subject
-        </label>
-
+        <label>Subject</label>
         <select>
-
-            <option>
-                Java
-            </option>
-
-            <option>
-                DBMS
-            </option>
-
-            <option>
-                Python
-            </option>
-
-            <option>
-                Computer Graphics
-            </option>
-
+            <option>Java</option>
+            <option>DBMS</option>
+            <option>Python</option>
+            <option>Computer Graphics</option>
         </select>
 
+        <label>Explain your doubt</label>
+        <textarea rows="5" placeholder="Give a little context..."></textarea>
 
-        <label>
-            Explain your doubt
-        </label>
-
-        <textarea
-            rows="5"
-            placeholder="Give a little context...">
-        </textarea>
-
-
-        <button
-            class="button button-dark full"
-            data-close>
-
-            Post question →
-
-        </button>
-
+        <button class="button button-dark full" data-close>Post question →</button>
     </div>
-
 </div>
 
 
@@ -1992,129 +4311,322 @@
 ========================================= -->
 
 <div class="modal-overlay" id="sellModal">
-
     <div class="modal">
+        <button class="modal-close" data-close>×</button>
+        <span class="section-kicker">CAMPUS CART</span>
+        <h2>List an item</h2>
+        <p>Help another student find something they need.</p>
 
-        <button
-            class="modal-close"
-            data-close>
-            ×
-        </button>
-
-        <span class="section-kicker">
-            CAMPUS CART
-        </span>
-
-        <h2>
-            List an item
-        </h2>
-
-        <p>
-            Help another student find
-            something they need.
-        </p>
-
-
-        <label>
-            Item name
-        </label>
-
-        <input
-            type="text"
-            placeholder="e.g. Engineering Mathematics book">
-
+        <label>Item name</label>
+        <input type="text" placeholder="e.g. Engineering Mathematics book">
 
         <div class="form-row">
-
             <div>
-
-                <label>
-                    Price
-                </label>
-
-                <input
-                    type="number"
-                    placeholder="500">
-
+                <label>Price</label>
+                <input type="number" placeholder="500">
             </div>
-
-
             <div>
-
-                <label>
-                    Category
-                </label>
-
+                <label>Category</label>
                 <select>
-
-                    <option>
-                        Books
-                    </option>
-
-                    <option>
-                        Electronics
-                    </option>
-
-                    <option>
-                        Stationery
-                    </option>
-
-                    <option>
-                        Lab Equipment
-                    </option>
-
+                    <option>Books</option>
+                    <option>Electronics</option>
+                    <option>Stationery</option>
+                    <option>Lab Equipment</option>
                 </select>
-
             </div>
-
         </div>
 
-
-        <label>
-            Condition
-        </label>
-
+        <label>Condition</label>
         <select>
-
-            <option>
-                Like New
-            </option>
-
-            <option>
-                Good
-            </option>
-
-            <option>
-                Used
-            </option>
-
+            <option>Like New</option>
+            <option>Good</option>
+            <option>Used</option>
         </select>
 
+        <label>Description</label>
+        <textarea rows="4" placeholder="Tell buyers about your item..."></textarea>
 
-        <label>
-            Description
-        </label>
-
-        <textarea
-            rows="4"
-            placeholder="Tell buyers about your item...">
-        </textarea>
-
-
-        <button
-            class="button button-dark full"
-            data-close>
-
-            Publish listing →
-
-        </button>
-
+        <button class="button button-dark full" data-close>Publish listing →</button>
     </div>
-
 </div>
 
 
-<script src="js/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* =====================================
+       PAGE NAVIGATION
+    ===================================== */
+
+    const navItems = document.querySelectorAll(".nav-item");
+    const pages = document.querySelectorAll(".page");
+    const pageTitle = document.getElementById("pageTitle");
+
+    const titles = {
+        home: "Good morning, Soham.",
+        study: "Study Buddy",
+        cart: "Campus Cart",
+        messages: "Your messages",
+        saved: "Your saved things",
+        profile: "Your campus profile"
+    };
+
+    function openPage(pageName) {
+
+        pages.forEach(page => page.classList.remove("active"));
+
+        const target = document.getElementById(pageName);
+        if (target) target.classList.add("active");
+
+        navItems.forEach(item => {
+            item.classList.toggle("active", item.dataset.page === pageName);
+        });
+
+        if (pageTitle) pageTitle.textContent = titles[pageName] || "CampusConnect";
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    navItems.forEach(item => {
+        item.addEventListener("click", () => openPage(item.dataset.page));
+    });
+
+    /* =====================================
+       HERO / MODULE NAVIGATION (data-go)
+    ===================================== */
+
+    document.querySelectorAll("[data-go]").forEach(element => {
+        element.addEventListener("click", (event) => {
+            event.stopPropagation();
+            openPage(element.dataset.go);
+        });
+    });
+
+    /* =====================================
+       QUESTION MODAL
+    ===================================== */
+
+    const questionModal = document.getElementById("questionModal");
+    const askQuestionButton = document.getElementById("askQuestionButton");
+
+    if (askQuestionButton) {
+        askQuestionButton.addEventListener("click", () => {
+            questionModal.classList.add("show");
+        });
+    }
+
+    /* =====================================
+       SELL MODAL
+    ===================================== */
+
+    const sellModal = document.getElementById("sellModal");
+    const sellItemButton = document.getElementById("sellItemButton");
+
+    if (sellItemButton) {
+        sellItemButton.addEventListener("click", () => {
+            sellModal.classList.add("show");
+        });
+    }
+
+    /* =====================================
+       CLOSE MODALS
+    ===================================== */
+
+    document.querySelectorAll("[data-close]").forEach(button => {
+        button.addEventListener("click", () => {
+            questionModal.classList.remove("show");
+            sellModal.classList.remove("show");
+        });
+    });
+
+    document.querySelectorAll(".modal-overlay").forEach(overlay => {
+        overlay.addEventListener("click", event => {
+            if (event.target === overlay) overlay.classList.remove("show");
+        });
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            questionModal.classList.remove("show");
+            sellModal.classList.remove("show");
+        }
+    });
+
+    /* =====================================
+       QUESTION SEARCH
+    ===================================== */
+
+    const questionSearch = document.getElementById("questionSearch");
+
+    if (questionSearch) {
+        questionSearch.addEventListener("input", () => {
+            const query = questionSearch.value.toLowerCase().trim();
+
+            document.querySelectorAll(".large-question").forEach(question => {
+                const text = question.textContent.toLowerCase();
+                question.style.display = text.includes(query) ? "" : "none";
+            });
+        });
+    }
+
+    /* =====================================
+       SUBJECT FILTER
+    ===================================== */
+
+    const subjectFilter = document.getElementById("subjectFilter");
+
+    if (subjectFilter) {
+        subjectFilter.addEventListener("change", () => {
+            const value = subjectFilter.value;
+
+            document.querySelectorAll(".large-question").forEach(question => {
+                if (value === "all") {
+                    question.style.display = "";
+                    return;
+                }
+
+                const pill = question.querySelector(".subject-pill");
+                if (!pill) return;
+
+                const subject = pill.textContent.toLowerCase();
+                question.style.display = subject.includes(value) ? "" : "none";
+            });
+        });
+    }
+
+    /* =====================================
+       CART CATEGORIES
+    ===================================== */
+
+    const categories = document.querySelectorAll(".category");
+
+    categories.forEach(category => {
+        category.addEventListener("click", () => {
+            categories.forEach(item => item.classList.remove("active"));
+            category.classList.add("active");
+
+            const filter = category.textContent.trim().toLowerCase();
+
+            document.querySelectorAll(".product-card").forEach(card => {
+                if (filter === "all") {
+                    card.style.display = "";
+                    return;
+                }
+                const cat = card.querySelector(".product-category").textContent.toLowerCase();
+                const matches =
+                    cat.includes(filter) ||
+                    (filter === "electronics" && cat.includes("calculator"));
+                card.style.display = matches ? "" : "none";
+            });
+        });
+    });
+
+    /* =====================================
+       PRODUCT SEARCH
+    ===================================== */
+
+    const productSearch = document.getElementById("productSearch");
+
+    if (productSearch) {
+        productSearch.addEventListener("input", () => {
+            const query = productSearch.value.toLowerCase().trim();
+
+            document.querySelectorAll(".product-card").forEach(product => {
+                const text = product.textContent.toLowerCase();
+                product.style.display = text.includes(query) ? "" : "none";
+            });
+        });
+    }
+
+    /* =====================================
+       HEART / SAVE BUTTONS
+    ===================================== */
+
+    document.querySelectorAll(".heart").forEach(button => {
+        button.addEventListener("click", event => {
+            event.stopPropagation();
+
+            if (button.textContent.trim() === "♡") {
+                button.textContent = "♥";
+                button.style.color = "#b23f66";
+            } else {
+                button.textContent = "♡";
+                button.style.color = "";
+            }
+        });
+    });
+
+    /* =====================================
+       CONTACT SELLER
+    ===================================== */
+
+    document.querySelectorAll(".contact-button").forEach(button => {
+        button.addEventListener("click", () => openPage("messages"));
+    });
+
+    /* =====================================
+       TABS
+    ===================================== */
+
+    document.querySelectorAll(".tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+            document.querySelectorAll(".tab").forEach(item => item.classList.remove("active"));
+            tab.classList.add("active");
+        });
+    });
+
+    /* =====================================
+       MOBILE MENU
+    ===================================== */
+
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (mobileMenu) {
+        mobileMenu.addEventListener("click", () => {
+            document.querySelector(".sidebar").classList.toggle("mobile-open");
+        });
+    }
+
+    /* =====================================
+       CHAT SEND
+    ===================================== */
+
+    const chatInput = document.getElementById("chatInput");
+    const chatSend = document.getElementById("chatSend");
+    const chatBody = document.getElementById("chatBody");
+
+    function sendMessage() {
+        if (!chatInput || !chatInput.value.trim()) return;
+
+        const msg = document.createElement("div");
+        msg.className = "chat-message sent";
+        msg.textContent = chatInput.value.trim();
+
+        chatBody.appendChild(msg);
+        chatInput.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    if (chatSend) chatSend.addEventListener("click", sendMessage);
+    if (chatInput) {
+        chatInput.addEventListener("keydown", e => {
+            if (e.key === "Enter") sendMessage();
+        });
+    }
+
+    /* =====================================
+       DEMO FORM SUBMISSION
+    ===================================== */
+
+    document.querySelectorAll(".modal .button.full").forEach(button => {
+        button.addEventListener("click", () => {
+            const modal = button.closest(".modal-overlay");
+            if (modal) modal.classList.remove("show");
+        });
+    });
+
+});
+</script>
 
 </body>
 </html>

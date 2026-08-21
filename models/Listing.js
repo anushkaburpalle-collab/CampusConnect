@@ -23,6 +23,16 @@ const listingSchema = new mongoose.Schema(
             required: true
         },
 
+        department: {
+            type: String,
+            default: "Any"
+        },
+
+        semester: {
+            type: String,
+            default: "Any"
+        },
+
         price: {
             type: Number,
             required: true
@@ -30,12 +40,8 @@ const listingSchema = new mongoose.Schema(
 
         condition: {
             type: String,
-            default: "Good"
-        },
-
-        image: {
-            type: String,
-            default: ""
+            enum: ["new", "good", "fair"],
+            default: "good"
         },
 
         status: {

@@ -13,9 +13,30 @@ const studyProfileSchema = new mongoose.Schema(
             type: String
         }],
 
+        department: {
+            type: String,
+            default: "Any"
+        },
+
+        semester: {
+            type: String,
+            default: "Any"
+        },
+
+        examDate: {
+            type: Date
+        },
+
         preparationLevel: {
             type: String,
+            enum: ["Beginner", "Intermediate", "Advanced"],
             default: "Intermediate"
+        },
+
+        studyPace: {
+            type: String,
+            enum: ["Slow", "Medium", "Fast"],
+            default: "Medium"
         },
 
         availability: {
@@ -26,6 +47,16 @@ const studyProfileSchema = new mongoose.Schema(
         studyMode: {
             type: String,
             default: "Offline"
+        },
+
+        matchScore: {
+            type: Number,
+            default: 0
+        },
+
+        sessionsCompleted: {
+            type: Number,
+            default: 0
         }
     },
     {
